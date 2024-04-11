@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#071D0E', 
+    backgroundColor: 'black', 
   },
   inputContainer: {
     flexDirection: 'row',
@@ -58,19 +58,19 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 16,
     padding: 8,
-    backgroundColor: '#004927',
+    backgroundColor: 'white',
     borderRadius: 20,
     paddingHorizontal: 16,
     fontSize: 16,
-    color: '#FFFFFF',
+    color: 'Black',
     borderWidth: 1,
-    borderColor: '#BDBDBD',
+    borderColor: 'white',
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
-    color: '#FFFFFF',
+    color: 'red',
   },
 });
 

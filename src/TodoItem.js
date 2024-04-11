@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 10,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'White',
     elevation: 2,
     borderRadius: 8,
     marginVertical: 5,
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   text: {
     flex: 1,
     fontSize: 16,
-    color: '#212121',
+    color: 'white',
   },
   input: {
     flex: 1,
