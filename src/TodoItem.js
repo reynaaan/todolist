@@ -1,4 +1,3 @@
-//my first ToDo app
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import { useStore } from './store';
@@ -11,6 +10,7 @@ const TodoItem = ({ text, id }) => {
 
   const [isEditing, setEditing] = useState(false);
   const [updatedText, setUpdatedText] = useState(text);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   const handleUpdate = () => {
     updateTodo(id, updatedText);
@@ -18,11 +18,18 @@ const TodoItem = ({ text, id }) => {
   };
 
   const handleDelete = () => {
-    deleteTodo(id);
+    setIsDeleted(true);
+    setTimeout(() => {
+      deleteTodo(id);
+    }, 1000);
   };
 
   return (
-    <Animatable.View style={styles.container} animation="fadeIn" duration={500}>
+    <Animatable.View
+      style={[styles.container, isDeleted && { height: 0, opacity: 0 }]}
+      animation={isDeleted ? 'fadeOutDown' : 'fadeIn'}
+      duration={isDeleted ? 500 : 1000}
+    >
       {isEditing ? (
         <View style={styles.editContainer}>
           <TextInput
@@ -58,7 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 10,
-    backgroundColor: 'White',
+    backgroundColor: '#FFFFFF',
     elevation: 2,
     borderRadius: 8,
     marginVertical: 5,
@@ -76,7 +83,7 @@ const styles = StyleSheet.create({
   text: {
     flex: 1,
     fontSize: 16,
-    color: 'white',
+    color: '#212121',
   },
   input: {
     flex: 1,

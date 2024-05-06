@@ -1,4 +1,3 @@
-//my first ToDo app
 import React, { useState } from 'react';
 import { View, Text, Button, TextInput, StyleSheet, FlatList } from 'react-native';
 import { useStore } from './store';
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: 'black', 
+    backgroundColor: '#071D0E', 
   },
   inputContainer: {
     flexDirection: 'row',
@@ -58,19 +57,19 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 16,
     padding: 8,
-    backgroundColor: 'white',
+    backgroundColor: '#004927',
     borderRadius: 20,
     paddingHorizontal: 16,
     fontSize: 16,
-    color: 'Black',
+    color: '#FFFFFF',
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: '#BDBDBD',
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
-    color: 'red',
+    color: '#FFFFFF',
   },
 });
 

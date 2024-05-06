@@ -1,4 +1,3 @@
-//my first ToDo app
 import React from 'react';
 import { View, Text, Button, Image, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,12 +9,12 @@ const Drawer = createDrawerNavigator();
 const CustomDrawerContent = (props) => (
   <DrawerContentScrollView {...props}>
     <View style={styles.drawerHeader}>
-      <Image source={require('./assets/amben.jpg')} style={styles.drawerImage} />
-      <Text style={styles.mahName}>Anven Moses L. Agbulos</Text>
-      <Text style={styles.sectionCode}>AppDEV-IT35B</Text>
-      <Text style={styles.courseName}>Batchelor Science of Information Technology</Text>
-      <Text style={styles.courseDesc}>I dunno</Text>
-      <Text style={styles.studId}>20211515</Text>
+      <Image source={require('./assets/nanaaan.jpg')} style={styles.drawerImage} />
+      <Text style={styles.mahName}>Reynan Jhay A. Busano</Text>
+      <Text style={styles.sectionCode}>IT73-IT35B</Text>
+      <Text style={styles.courseName}>Bachelor of Science in Information Technology</Text>
+      <Text style={styles.courseDesc}>Application Development</Text>
+      <Text style={styles.studId}>20201086</Text>
     </View>
     <DrawerItemList {...props} />
   </DrawerContentScrollView>
@@ -25,7 +24,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="TodoList" drawerContent={(props) => <CustomDrawerContent {...props} />}>
-        <Drawer.Screen name="TodoList" component={TodoList} options={{ title: "Amben's Today's Tasks" }} />
+        <Drawer.Screen name="TodoList" component={TodoList} options={{ title: "Nanan's Todo List" }} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
@@ -33,7 +32,7 @@ const App = () => {
 
 const styles = StyleSheet.create({
   drawerHeader: {
-    backgroundColor: '#2b09b2',
+    backgroundColor: '#004927',
     paddingVertical: 20,
     paddingHorizontal: 10,
     alignItems: 'center',
