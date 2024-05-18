@@ -1,42 +1,58 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Button, TextInput, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { useStore } from './store';
 import { FontAwesome5 } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
+import { useTodoStore } from '../store';
+import { firebase } from '../config';
 
 const TodoList = () => {
-  const todos = useStore((state) => state.todos);
-  const addTodo = useStore((state) => state.addTodo);
-  const deleteTodo = useStore((state) => state.deleteTodo);
-  const updateTodo = useStore((state) => state.updateTodo);
+  const todos = useTodoStore((state) => state.todos);
+  const setTodos = useTodoStore((state) => state.setTodos);
+  const addTodo = useTodoStore((state) => state.addTodo);
+  const deleteTodo = useTodoStore((state) => state.deleteTodo);
+  const updateTodo = useTodoStore((state) => state.updateTodo);
 
   const [newTodo, setNewTodo] = useState('');
   const [updatedText, setUpdatedText] = useState('');
   const [editItemId, setEditItemId] = useState(null);
 
-  const handleAddTodo = () => {
+  useEffect(() => {
+    const fetchTodos = async () => {
+      const todosSnapshot = await firebase.firestore().collection('todos').get();
+      const todosList = todosSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setTodos(todosList);
+    };
+
+    fetchTodos();
+  }, []);
+
+  const handleAddTodo = async () => {
     if (newTodo) {
-      addTodo({
-        id: Date.now(),
-        text: newTodo
-      });
+      const newTodoItem = { text: newTodo };
+      const addedTodoRef = await firebase.firestore().collection('todos').add(newTodoItem);
+      addTodo({ id: addedTodoRef.id, ...newTodoItem });
       setNewTodo('');
     }
   };
 
-  const handleUpdate = (id) => {
+  const handleUpdate = async (id) => {
+    await firebase.firestore().collection('todos').doc(id).update({ text: updatedText });
     updateTodo(id, updatedText);
     setEditItemId(null);
     setUpdatedText('');
   };
 
+  const handleDelete = async (id) => {
+    await firebase.firestore().collection('todos').doc(id).delete();
+    deleteTodo(id);
+  };
+
   const handleStartEdit = (id, text) => {
     setEditItemId(id);
     setUpdatedText(text);
-  };
-
-  const handleDelete = (id) => {
-    deleteTodo(id);
   };
 
   return (
@@ -47,7 +63,7 @@ const TodoList = () => {
           style={styles.input}
           placeholder="Add new task"
           value={newTodo}
-          onChangeText={(text) => setNewTodo(text)}
+          onChangeText={setNewTodo}
         />
         <Button title="+" onPress={handleAddTodo} color="#004927" />
       </View>
@@ -155,3 +171,4 @@ const styles = StyleSheet.create({
 });
 
 export default TodoList;
+
